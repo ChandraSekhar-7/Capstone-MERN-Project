@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "dev": "cd react-project && npm run dev",
+    "build": "cd react-project && npm run build",
+    "lint": "cd react-project && npm run lint",
+    "preview": "cd react-project && npm run preview"
+  }
+}

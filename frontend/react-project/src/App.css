@@ -1,0 +1,713 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* --- 1. GLOBAL ROOT VARIABLES & DESIGN TOKENS --- */
+:root {
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --accent: #10b981;
+  --bg-main: #f3f5f9;
+  --bg-surface: #ffffff;
+  --bg-surface-soft: #f8fafc;
+  --text-main: #0f172a;
+  --text-muted: #58627a;
+  --border: rgba(148, 163, 184, 0.24);
+  --radius: 18px;
+  --shadow: 0 18px 45px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 32px 80px rgba(15, 23, 42, 0.14);
+  --transition: all 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- 2. RESET & BASE ACCENTS --- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: radial-gradient(circle at top left, rgba(79, 70, 229, 0.16), transparent 30%), radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.12), transparent 26%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-main);
+  font-weight: 700;
+  margin-top: 0;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* --- 3. AUTHENTICATION SCREENS LAYOUT (LOGIN/REGISTER) --- */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  padding: 1.5rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  box-shadow: 0 28px 80px rgba(15, 23, 42, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.auth-card h2 {
+  text-align: center;
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+}
+
+.auth-form label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: -0.5rem;
+}
+
+.auth-form select, 
+.auth-form input {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background-color: var(--bg-surface);
+  transition: var(--transition);
+}
+
+.auth-form select:focus, 
+.auth-form input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-field input {
+  width: 100%;
+  padding-right: 6rem;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--primary);
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.password-toggle:hover {
+  background-color: rgba(79, 70, 229, 0.08);
+}
+
+/* --- 4. MASTER FRAMEWORK SHELL LAYOUT --- */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: #f3f5f9;
+}
+
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: transparent;
+}
+
+.main-content {
+  padding: 2rem 2.5rem;
+  max-width: 1400px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  flex-grow: 1;
+  animation: pageFadeIn 320ms ease-out;
+}
+
+/* --- 5. WORKSPACE CONTROL SIDEBAR --- */
+.sidebar {
+  width: 280px;
+  background-color: #ffffff;
+  border-right: 1px solid rgba(148, 163, 184, 0.14);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  box-shadow: 2px 0 18px rgba(15, 23, 42, 0.08);
+  background: linear-gradient(180deg, #fafbff 0%, #eef4ff 100%);
+}
+
+.brand {
+  padding: 2rem 1.75rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.brand h2 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.6rem;
+  letter-spacing: -0.04em;
+}
+
+.role-tag {
+  display: inline-flex;
+  margin-top: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background-color: #eff2ff;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 1.3rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.nav-links li {
+  padding: 0.95rem 1rem;
+  border-radius: 14px;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.nav-links li:hover {
+  background-color: #f8fafc;
+  color: var(--text-main);
+}
+
+.nav-links li.active {
+  background-color: #eef2ff;
+  color: var(--primary);
+  box-shadow: inset 0 0 0 1px rgba(79, 70, 229, 0.12);
+  border-left: 4px solid var(--primary);
+  padding-left: 0.85rem;
+}
+
+/* --- 6. SYSTEM GLOBAL HEADER (NAVBAR) --- */
+.navbar {
+  background: rgba(255, 255, 255, 0.96);
+  padding: 1.25rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  flex-shrink: 0;
+  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+.welcome-text h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.welcome-text p {
+  margin: 0.35rem 0 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  background-color: var(--primary);
+  color: var(--bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 0 0 3px #eef2ff;
+}
+
+.btn-logout {
+  background-color: #f8fafc;
+  color: #1e293b;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-logout:hover {
+  background-color: #eff6ff;
+  color: #0f172a;
+  border-color: rgba(79, 70, 229, 0.25);
+}
+
+/* --- 7. REUSABLE CONTAINER PANELS & FORMS --- */
+.card-container {
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
+  padding: 2rem;
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  margin-bottom: 2rem;
+  animation: fadeInUp 320ms ease-out;
+}
+
+.card-container h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1.25rem;
+  border-left: 4px solid rgba(79, 70, 229, 0.9);
+  padding-left: 0.85rem;
+}
+
+.inline-form {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.inline-form input {
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 14px;
+  flex: 1;
+  min-width: 220px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition);
+  background-color: #f8fafc;
+}
+
+.inline-form input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.08);
+  background-color: #ffffff;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--bg-surface);
+  border: none;
+  padding: 0.95rem 1.4rem;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 0.96rem;
+  cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 18px 42px rgba(79, 70, 229, 0.14);
+}
+
+.btn-primary:hover {
+  background-color: #4338ca;
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px rgba(79, 70, 229, 0.16);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* --- 8. SYSTEM DATA BLOCKS DISPLAY GRID --- */
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.75rem;
+  margin-top: 1.5rem;
+}
+
+.item-card {
+  background: linear-gradient(180deg, #ffffff 0%, #f3f6ff 100%);
+  padding: 1.85rem;
+  border-radius: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  display: flex;
+  flex-direction: column;
+  will-change: transform, opacity;
+  animation: cardEntrance 420ms ease-out;
+}
+
+.item-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.1);
+  border-color: rgba(79, 70, 229, 0.18);
+}
+
+.item-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.item-card p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.item-card strong {
+  color: var(--text-main);
+}
+
+.btn-move {
+  width: 100%;
+  padding: 0.95rem;
+  margin-top: auto;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background-color: #eff6ff;
+  border-radius: 16px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1e293b;
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.06);
+}
+
+.btn-move:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: #eef4ff;
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+}
+
+/* --- 9. SUBMISSIONS & PIPELINE TRACKERS --- */
+.submission-row {
+  background-color: #f8fafc;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.submission-row p {
+  display: block;
+  margin: 0.25rem 0;
+}
+
+/* --- ENROLLMENT MODAL / REDIRECT STYLES --- */
+.enroll-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 80;
+  backdrop-filter: blur(6px);
+}
+.enroll-modal {
+  width: 500px;
+  max-width: 94%;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 32px 80px rgba(15, 23, 42, 0.15);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 220ms ease, opacity 220ms ease;
+  will-change: transform, opacity;
+  animation: modalPop 250ms ease-out;
+}
+.enroll-modal h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+  color: var(--text-main);
+}
+.enroll-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+}
+.enroll-form input,
+.enroll-form textarea,
+.enroll-form select {
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: #f8fafc;
+  color: var(--text-main);
+  transition: var(--transition);
+}
+.enroll-form input:focus,
+.enroll-form textarea:focus,
+.enroll-form select:focus {
+  box-shadow: 0 16px 40px rgba(79, 70, 229, 0.08);
+  border-color: var(--primary);
+  outline: none;
+  background: #ffffff;
+}
+.enroll-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+.enroll-actions .btn-primary {
+  min-width: 170px;
+}
+.enroll-cancel {
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 0.8rem 1rem;
+  border-radius: 16px;
+  cursor: pointer;
+  color: #475569;
+  font-weight: 700;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+.enroll-cancel:hover {
+  background-color: rgba(15, 23, 42, 0.04);
+  border-color: rgba(79, 70, 229, 0.2);
+}
+
+.enroll-redirect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f9fafb, #ffffff);
+  border-radius: 24px;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+}
+.enroll-redirect h2 {
+  color: var(--primary);
+  margin: 0;
+}
+.enroll-redirect p {
+  color: var(--text-muted);
+  margin: 0;
+}
+.enroll-redirect .btn-primary {
+  margin-top: 1rem;
+}
+
+@media (max-width:520px) {
+  .enroll-modal {
+    padding: 1.2rem 1rem;
+  }
+  .enroll-actions {
+    flex-direction: column-reverse;
+  }
+  .enroll-actions .btn-primary {
+    width: 100%;
+  }
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes modalPop {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* --- 10. MODAL LAYER --- */
+.modal {
+  z-index: 60;
+}
+.modal > div {
+  animation: slideUp 220ms ease-out;
+}
+@keyframes slideUp {
+  from { transform: translateY(6px) scale(0.995); opacity: 0 }
+  to { transform: translateY(0) scale(1); opacity: 1 }
+}
+
+/* --- 11. FORM ELEMENTS & TEXTAREA --- */
+textarea {
+  min-height: 100px;
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  resize: vertical;
+  font-family: inherit;
+  background: var(--bg-surface-soft);
+  transition: var(--transition);
+}
+
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 16px 40px rgba(79, 70, 229, 0.08);
+}
+
+select {
+  padding: 0.75rem 0.9rem;
+  border-radius: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: var(--bg-surface-soft);
+  transition: var(--transition);
+}
+
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 16px 40px rgba(79, 70, 229, 0.08);
+}
+
+/* --- 12. DANGER BUTTON --- */
+.btn-danger {
+  background: #fff5f5;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.btn-danger:hover { background: #fecaca; color: white }
+
+/* --- 13. SMALL UTILITY STYLES --- */
+.small { font-size: 0.85rem; color: var(--text-muted) }
+.muted { color: var(--text-muted) }
+
+/* --- 14. RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 900px) {
+  .sidebar { width: 72px }
+  .brand h2 { font-size: 1rem }
+  .main-content { padding: 1rem }
+  .nav-links li { padding: 0.6rem }
+  .data-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) }
+}
+
+@media (max-width: 520px) {
+  .inline-form { flex-direction: column }
+  .auth-card { padding: 1.25rem }
+}
+
+/* Responsive Scaling Layers */
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+  
+  .main-content {
+    padding: 1.5rem;
+  }
+  
+  .inline-form {
+    flex-direction: column;
+  }
+  
+  .inline-form button {
+    width: 100%;
+  }
+}
