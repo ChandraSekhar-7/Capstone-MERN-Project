@@ -12,7 +12,11 @@ const User = require("./models/User");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "https://capstone-mern-project-frontend.onrender.com", // 🔌 Paste your actual live Render frontend link here
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 function normalizeMongoUri(uri) {
   if (!uri) return uri;
