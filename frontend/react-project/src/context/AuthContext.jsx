@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
 
   const login = (email, password, role) => {
-    fetch("http://localhost:5000/api/auth/login", {
+    fetch("https://capstone-mern-project-backend.onrender.com/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password, role })
@@ -28,7 +28,7 @@ export function AuthProvider({ children }) {
   };
 
   const register = (name, email, password, role) => {
-    fetch("http://localhost:5000/api/auth/register", {
+    fetch("https://capstone-mern-project-backend.onrender.com/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password, role })
